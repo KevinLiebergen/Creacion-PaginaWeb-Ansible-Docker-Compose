@@ -1,0 +1,42 @@
+version: '3'
+ 
+services:
+   mariadb01:
+     image: mariadb:10.0.29
+     volumes:
+       - VL_mariadb01:/var/lib/mysql
+     restart: always
+     environment:
+       - MYSQL_ROOT_PASSWORD=root_P@ssw0rd
+       - MYSQL_DATABASE=wordpress01
+       - MYSQL_USER=user_wordpress01
+       - MYSQL_PASSWORD=user_P@ssw0rd
+     networks:
+       - BackEnd
+ 
+   wordpress01:
+     depends_on:
+       - mariadb01
+     image: wordpress:4.7.2-apache
+     ports:
+       - "80:80"
+     restart: always
+     volumes:
+           - VL_wordpress01:/var/www/html
+     environment:
+       - WORDPRESS_DB_HOST=mariadb01
+       - WORDPRESS_DB_NAME=wordpress01
+       - WORDPRESS_DB_USER=user_wordpress01
+       - WORDPRESS_DB_PASSWORD=user_P@ssw0rd
+     networks:
+       - FrontEnd
+       - BackEnd
+volumes:
+    VL_mariadb01:
+    VL_wordpress01:
+ 
+networks:
+    FrontEnd:
+      driver: bridge
+    BackEnd:
+      driver: bridge

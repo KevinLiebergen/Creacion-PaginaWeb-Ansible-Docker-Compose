@@ -1,0 +1,9 @@
+---
+- hosts: webservers
+
+  become: true  #Lanza la tarea como superusuario
+  tasks:
+          - name: Para el servicio web
+            docker_service:
+                    project_src: /home/kevin/Desktop/SitioWeb01/
+                    stopped: true
