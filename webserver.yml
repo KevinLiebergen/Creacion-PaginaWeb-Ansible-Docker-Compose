@@ -41,12 +41,12 @@
          # #
           - name: Copiar archivo creacion pagina web en nodo local
             copy:
-                    src: /home/kevin/Descargas/docker-compose.yml
-                    dest: /home/kevin/Desktop/SitioWeb01/
+                    src: docker-compose.yml   #Ruta absoluta
+                    dest: /home/kevin/Desktop/SitioWeb01/           #Destino maquina virtual
         ##
         # Se levanta / ejecuta el servicio paginaWeb-docker-compose.yml 
         # #
           - name: Se levanta la pagina web
             docker_service:
-                    project_src: /home/kevin/Desktop/SitioWeb01/
+                    project_src: /home/kevin/Desktop/SitioWeb01/  #Destino maquina virtual
                    
